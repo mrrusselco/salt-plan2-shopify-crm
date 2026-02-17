@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Salt Lagos — Plan 2: Shopify + CRM (HubSpot / Zoho)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700;800&family=Jost:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+
+  :root {
+    --black: #0D0D0D;
+    --salt: #FAFAF7;
+    --gold: #C49A3C;
+    --navy: #0F2D52;
+    --teal: #1A6B6B;
+    --muted: #6B6558;
+    --border: #E2DDD6;
+    --rose: #C0392B;
+    --sage: #2E7D5A;
+    --sky: #1E5FA3;
+    --lavender: #5B2D8E;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: #FFFFFF;
+    color: var(--black);
+    font-size: 14.5px;
+    line-height: 1.8;
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 60px 44px;
+  }
+
+  .cover {
+    text-align: center;
+    padding: 70px 0 80px;
+    margin-bottom: 70px;
+  }
+
+  .cover-rule { width: 100%; height: 1px; background: var(--black); margin-bottom: 40px; }
+  .cover-rule-gold { width: 100%; height: 2px; background: linear-gradient(90deg, var(--navy), var(--teal)); margin-bottom: 40px; }
+
+  .plan-badge {
+    display: inline-block;
+    border: 1px solid var(--navy);
+    color: var(--navy);
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 2px;
+    margin-bottom: 28px;
+  }
+
+  h1.title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 58px;
+    font-weight: 800;
+    color: var(--black);
+    letter-spacing: -1px;
+    line-height: 1.05;
+    margin-bottom: 8px;
+  }
+
+  .title-accent { color: var(--navy); font-style: italic; }
+  .title-teal { color: var(--teal); }
+
+  .tagline {
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin: 18px 0 32px;
+  }
+
+  .meta-row { display: flex; gap: 28px; justify-content: center; font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; }
+  .meta-row span::before { content: "— "; color: var(--navy); }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--black);
+    margin: 64px 0 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--black);
+    display: flex;
+    gap: 16px;
+    align-items: baseline;
+  }
+
+  .sec-num { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--navy); letter-spacing: 2px; font-weight: 400; }
+
+  h3 { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; color: var(--black); margin: 30px 0 10px; }
+
+  p { margin-bottom: 15px; color: #2A2A2A; font-weight: 300; }
+  strong { font-weight: 600; color: var(--black); }
+
+  .callout { border-radius: 0; padding: 20px 24px; margin: 22px 0; border-left: 3px solid; }
+  .callout-navy { border-color: var(--navy); background: #F0F4FA; }
+  .callout-teal { border-color: var(--teal); background: #F2FAFA; }
+  .callout-gold { border-color: var(--gold); background: #FBF8F2; }
+  .callout-lavender { border-color: var(--lavender); background: #F7F3FC; }
+  .callout-warn { border-color: var(--rose); background: #FDF3F2; }
+
+  .callout-label { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 500; margin-bottom: 10px; }
+  .lbl-navy { color: var(--navy); }
+  .lbl-teal { color: var(--teal); }
+  .lbl-gold { color: var(--gold); }
+  .lbl-lavender { color: var(--lavender); }
+  .lbl-red { color: var(--rose); }
+
+  table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13.5px; }
+
+  th { background: var(--navy); color: white; padding: 10px 16px; text-align: left; font-weight: 500; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; font-family: 'DM Mono', monospace; }
+
+  td { padding: 11px 16px; border-bottom: 1px solid var(--border); vertical-align: top; font-weight: 300; }
+  tr:nth-child(even) td { background: var(--salt); }
+  .cost-total td { background: var(--navy) !important; color: white !important; font-weight: 600; }
+  .crm-winner td:first-child { border-left: 3px solid var(--teal); }
+
+  .badge { display: inline-block; padding: 3px 10px; border-radius: 2px; font-size: 11px; font-weight: 600; font-family: 'DM Mono', monospace; letter-spacing: .5px; }
+  .b-navy  { background: #DBEAFE; color: #1E3A5F; }
+  .b-teal  { background: #CCFBF1; color: #134E4A; }
+  .b-amber { background: #FEF3C7; color: #92400E; }
+  .b-purple{ background: #EDE9FE; color: #5B21B6; }
+  .b-orange{ background: #FFEDD5; color: #9A3412; }
+  .b-green { background: #D1FAE5; color: #065F46; }
+
+  .cl { list-style: none; margin: 14px 0; }
+  .cl li { padding: 9px 0; border-bottom: 1px solid var(--border); display: flex; gap: 12px; align-items: flex-start; font-weight: 300; }
+  .cl li:last-child { border-bottom: none; }
+  .ck { flex-shrink: 0; margin-top: 3px; font-size: 13px; }
+  .ck-yes { color: var(--sage); }
+  .ck-no  { color: var(--rose); }
+  .ck-new { color: var(--navy); }
+
+  .flow-wrap { overflow-x: auto; margin: 28px 0; }
+  .flow { display: flex; align-items: stretch; gap: 0; min-width: 600px; }
+  .flow-step { flex: 1; text-align: center; }
+  .flow-box { border-radius: 4px; padding: 18px 8px; font-size: 11px; font-weight: 600; font-family: 'DM Mono', monospace; letter-spacing: .3px; text-transform: uppercase; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; }
+  .flow-arrow { display: flex; align-items: center; justify-content: center; padding: 0 6px; color: var(--navy); font-size: 20px; flex-shrink: 0; }
+
+  .crm-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 24px 0; }
+  .crm-card { border: 1px solid var(--border); padding: 24px; border-top: 3px solid; }
+  .crm-name { font-weight: 700; font-size: 16px; margin-bottom: 4px; }
+  .crm-tag { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 14px; }
+  .crm-feature { font-size: 13px; margin-bottom: 5px; padding-left: 14px; position: relative; font-weight: 300; }
+  .crm-feature::before { content: "→"; position: absolute; left: 0; font-weight: 600; }
+  .crm-pros { color: var(--teal); }
+  .crm-cons { color: var(--rose); }
+  .crm-price { font-family: 'DM Mono', monospace; font-size: 13px; font-weight: 500; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border); }
+
+  .dept-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 22px 0; }
+  .dept-card { padding: 20px; border: 1px solid var(--border); border-top: 3px solid; }
+  .dept-icon { font-size: 26px; margin-bottom: 8px; }
+  .dept-name { font-weight: 600; font-size: 14px; color: var(--black); margin-bottom: 8px; }
+  .dept-list { list-style: none; font-size: 12.5px; color: var(--muted); font-weight: 300; }
+  .dept-list li { margin-bottom: 5px; padding-left: 14px; position: relative; }
+  .dept-list li::before { content: "→"; position: absolute; left: 0; color: var(--navy); }
+
+  .tl { margin: 22px 0; }
+  .tl-item { display: flex; gap: 20px; padding-bottom: 28px; position: relative; }
+  .tl-item::before { content:''; position:absolute; left:18px; top:38px; bottom:0; width:1px; background:var(--border); }
+  .tl-item:last-child::before { display:none; }
+  .tl-dot { width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; border: 1px solid var(--border); }
+  .tl-content { flex: 1; padding-top: 6px; }
+  .tl-title { font-weight: 600; color: var(--black); margin-bottom: 4px; }
+  .tl-desc { font-size: 13px; color: var(--muted); font-weight: 300; }
+
+  .compare-table th { background: var(--navy); }
+  .compare-table .plan1 { background: #FBF8F2; }
+  .compare-table .plan2 { background: #F0F4FA; }
+  .compare-table .winner { color: var(--teal); font-weight: 600; }
+
+  .doc-footer { margin-top: 80px; padding-top: 24px; border-top: 1px solid var(--black); display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; letter-spacing: .5px; }
+
+  code { font-family: 'DM Mono', monospace; background: var(--salt); border: 1px solid var(--border); padding: 2px 7px; font-size: 12.5px; color: var(--navy); }
+
+  @media print { body { padding: 20px; } h2 { page-break-before: always; } }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-rule"></div>
+  <div class="plan-badge">Plan 02 — Shopify + CRM</div>
+  <h1 class="title">Salt Lagos<br/><span class="title-accent">Integrated CRM</span><br/><span class="title-teal">&amp; Order System</span></h1>
+  <p class="tagline">Internal Systems Proposal · February 2026</p>
+  <div class="meta-row">
+    <span>5 Order Channels</span>
+    <span>Shopify Native</span>
+    <span>Full CRM</span>
+    <span>saltlagos.com</span>
+  </div>
+  <div class="cover-rule-gold" style="margin-top: 40px; margin-bottom: 0;"></div>
+</div>
+
+
+<!-- 01 WHAT IS PLAN 2 -->
+<h2><span class="sec-num">01</span> What Is Plan 2?</h2>
+
+<p>Plan 2 takes everything Plan 1 achieves — unified order intake, unread email alerts, department routing, and real-time status tracking — and builds it on a more powerful foundation: <strong>Shopify as the operational core</strong> connected to a dedicated <strong>CRM (Customer Relationship Management) platform</strong>.</p>
+
+<p>Instead of stitching together Zapier and Airtable, Plan 2 uses Shopify's native integrations and a CRM's built-in automation to handle order management, customer profiles, follow-ups, marketing, and reporting all in one place.</p>
+
+<div class="callout callout-navy">
+  <div class="callout-label lbl-navy">🔑 The Core Difference</div>
+  <p style="margin:0">Plan 1 is an <strong>order tracker</strong>. Plan 2 is an <strong>order tracker + customer intelligence system</strong>. With a CRM, Salt Lagos gains full visibility into who their customers are — their order history, preferences, lifetime spend, and how they were acquired — enabling smarter marketing, personalised follow-ups, and loyalty building at scale.</p>
+</div>
+
+<div class="callout callout-teal">
+  <div class="callout-label lbl-teal">✔ What Plan 2 Adds Over Plan 1</div>
+  <ul class="cl">
+    <li><span class="ck ck-yes">+</span><span><strong>Customer profiles:</strong> Every customer who has ever ordered from Salt gets a unified profile — all orders, emails, and interactions in one place, including social media touchpoints.</span></li>
+    <li><span class="ck ck-yes">+</span><span><strong>Repeat order tracking:</strong> See which customers order frequently, which ones haven't ordered in a while, and automatically trigger re-engagement messages.</span></li>
+    <li><span class="ck ck-yes">+</span><span><strong>Marketing automation:</strong> Birthday cake reminders, seasonal promotions, abandoned cart emails — all triggered automatically from customer data.</span></li>
+    <li><span class="ck ck-yes">+</span><span><strong>Social media integration built in:</strong> CRM tools like HubSpot and Zoho natively track Facebook and Instagram interactions, not just orders.</span></li>
+    <li><span class="ck ck-yes">+</span><span><strong>Omnichannel inbox:</strong> Email, WhatsApp, social DMs, and website chat all managed from one CRM inbox — nothing gets lost.</span></li>
+    <li><span class="ck ck-yes">+</span><span><strong>Revenue forecasting:</strong> CRM dashboards show projected revenue based on pending orders, repeat customer rates, and seasonal trends.</span></li>
+  </ul>
+</div>
+
+
+<!-- 02 SYSTEM ARCHITECTURE -->
+<h2><span class="sec-num">02</span> System Architecture</h2>
+
+<p>In Plan 2, Shopify is the commerce engine. All sales data flows from Shopify directly into the CRM via a native integration (no Zapier needed for Shopify). The CRM then becomes the single hub where all other channels — Gmail, WhatsApp, social media, and phone — converge.</p>
+
+<div class="flow-wrap">
+  <div class="flow">
+    <div class="flow-step">
+      <div class="flow-box" style="background:#EDE9FE; color:#5B21B6;">
+        <span style="font-size:20px">🛒</span>
+        <span>Shopify<br/>(Commerce Core)</span>
+      </div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-box" style="background:#E0F2FE; color:#0C4A6E;">
+        <span style="font-size:20px">🧠</span>
+        <span>CRM<br/>(HubSpot / Zoho)</span>
+      </div>
+    </div>
+    <div class="flow-arrow">←→</div>
+    <div class="flow-step">
+      <div class="flow-box" style="background:#FEF3C7; color:#92400E;">
+        <span style="font-size:20px">📥</span>
+        <span>All Channels<br/>Gmail · WA · Social</span>
+      </div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-box" style="background:#CCFBF1; color:#134E4A;">
+        <span style="font-size:20px">📊</span>
+        <span>Unified<br/>Dashboard</span>
+      </div>
+    </div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-step">
+      <div class="flow-box" style="background:#D1FAE5; color:#065F46;">
+        <span style="font-size:20px">🔁</span>
+        <span>Auto<br/>Marketing</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- 03 CRM OPTIONS -->
+<h2><span class="sec-num">03</span> Recommended CRM Options for Salt Lagos</h2>
+
+<p>After reviewing the leading Shopify-compatible CRMs, two stand out as the right fit for Salt Lagos at its current stage and trajectory. Both offer native Shopify integration, omnichannel communication, and social media tracking.</p>
+
+<div class="crm-grid">
+
+  <div class="crm-card" style="border-top-color: #FF5C35;">
+    <div class="crm-name">HubSpot CRM</div>
+    <div class="crm-tag">⭐ Top Pick · Best Free Start</div>
+    <div style="margin-bottom:10px; font-size:12.5px; font-weight:300; color:var(--muted)">The world's most popular CRM with a genuinely powerful free tier. Ideal for Salt Lagos to start without upfront cost and scale as the business grows.</div>
+    <div class="crm-feature crm-pros">Native Shopify one-click integration — syncs orders, customers, products in real time</div>
+    <div class="crm-feature crm-pros">Free plan supports unlimited contacts and unlimited users</div>
+    <div class="crm-feature crm-pros">Tracks Facebook &amp; Instagram interactions natively</div>
+    <div class="crm-feature crm-pros">Gmail integration — emails logged automatically to customer records</div>
+    <div class="crm-feature crm-pros">Built-in email marketing with automation flows (birthday reminders, re-engagement)</div>
+    <div class="crm-feature crm-pros">Ecommerce dashboards auto-generated when connected to Shopify</div>
+    <div class="crm-feature crm-pros">WhatsApp integration via third-party connector (Twilio or similar)</div>
+    <div class="crm-feature crm-cons">Free plan lacks advanced automation; paid Marketing Hub is expensive ($800/mo for automation)</div>
+    <div class="crm-feature crm-cons">Can become complex — some features Salt may never use</div>
+    <div class="crm-price">💰 Free forever (core CRM) · Starter from $15/user/mo · Marketing automation from $50/mo</div>
+  </div>
+
+  <div class="crm-card" style="border-top-color: #E42527;">
+    <div class="crm-name">Zoho CRM</div>
+    <div class="crm-tag">🌍 Africa-Friendly · Best Value Paid</div>
+    <div style="margin-bottom:10px; font-size:12.5px; font-weight:300; color:var(--muted)">A comprehensive, affordable CRM with strong omnichannel tools. Zoho's full suite (CRM + email + social + helpdesk) makes it a one-stop solution that's very cost-effective compared to HubSpot's paid tiers.</div>
+    <div class="crm-feature crm-pros">Native Shopify integration syncs orders, customers, and product data</div>
+    <div class="crm-feature crm-pros">Omnichannel: email, phone, WhatsApp, Facebook, Instagram, Twitter — all in one inbox</div>
+    <div class="crm-feature crm-pros">Social media DM management and tracking built in (no extra tool needed)</div>
+    <div class="crm-feature crm-pros">Workflow automation included in standard plan — no extra cost</div>
+    <div class="crm-feature crm-pros">Zoho Desk for customer support tickets (converts social DMs into tickets)</div>
+    <div class="crm-feature crm-pros">More affordable at scale — $14–20/user/mo vs HubSpot's steep jumps</div>
+    <div class="crm-feature crm-pros">Multicurrency — handles ₦ Naira and international customers</div>
+    <div class="crm-feature crm-cons">Steeper initial learning curve than HubSpot</div>
+    <div class="crm-feature crm-cons">UI less polished than HubSpot; setup requires more configuration</div>
+    <div class="crm-price">💰 Free plan (3 users) · Standard from $14/user/mo · Professional from $23/user/mo</div>
+  </div>
+
+</div>
+
+<div class="callout callout-teal">
+  <div class="callout-label lbl-teal">💡 Our Recommendation for Salt Lagos</div>
+  <p style="margin:0"><strong>Start with HubSpot CRM (free)</strong> connected to Shopify. Use the free plan to unify order tracking and customer profiles. If Salt wants advanced automation (birthday campaigns, event re-marketing), upgrade to HubSpot Starter ($15–50/mo) or switch to Zoho CRM Standard for better value on paid features. Either path can be activated within the same 2–3 week setup window.</p>
+</div>
+
+
+<!-- 04 ORDER CHANNELS -->
+<h2><span class="sec-num">04</span> How All Five Channels Work in Plan 2</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Channel</th>
+      <th>How It Flows Into CRM</th>
+      <th>Auto-Response</th>
+      <th>What CRM Adds</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>🛒 Shopify</strong></td>
+      <td>Native CRM integration syncs every order in real time — no Zapier needed. Customer record created or updated automatically.</td>
+      <td>Shopify's native order confirmation + CRM follow-up sequence triggered</td>
+      <td>Full customer purchase history, lifetime value, average order value all tracked</td>
+    </tr>
+    <tr>
+      <td><strong>✉ Gmail</strong></td>
+      <td>CRM Gmail plugin logs all emails to customer records. Unread emails flagged in CRM inbox with alert. Auto-reply sent within seconds.</td>
+      <td>CRM-triggered acknowledgement email: "We've received your order enquiry, Salt will respond within a few hours."</td>
+      <td>Email thread is visible alongside all other customer interactions — no switching between Gmail and the system</td>
+    </tr>
+    <tr>
+      <td><strong>💬 WhatsApp</strong></td>
+      <td>WhatsApp Business connected to CRM via Twilio integration. Messages logged as CRM tickets. Auto-reply sent instantly.</td>
+      <td>"Thanks for reaching out to Salt Lagos! 🍰 To order, please visit saltlagos.com or reply here to speak with our team."</td>
+      <td>WhatsApp messages tied to customer profile alongside email and Shopify orders</td>
+    </tr>
+    <tr>
+      <td><strong>📱 Social Media (Instagram/Facebook)</strong></td>
+      <td>CRM social inbox (HubSpot or Zoho Social) captures all DMs and comments. Auto-redirect message sent. DM logged as lead/ticket.</td>
+      <td>Instant auto-DM: "Hi! 🍰 We don't accept orders via DM. Please order at saltlagos.com or email info@saltlagos.com."</td>
+      <td>Social interactions linked to customer profiles. Track how many Shopify conversions originated from social media.</td>
+    </tr>
+    <tr>
+      <td><strong>☎ Phone</strong></td>
+      <td>Staff logs call outcome in CRM. CRM creates or updates customer record. Optional: CRM phone dialers can record call notes automatically.</td>
+      <td>Staff sends WhatsApp or email confirmation post-call</td>
+      <td>Call history logged alongside all other touchpoints. Management can see call volume and outcomes.</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<!-- 05 AUTOMATION FLOWS -->
+<h2><span class="sec-num">05</span> Automation Flows (What Happens Automatically)</h2>
+
+<p>Plan 2's biggest advantage over Plan 1 is the depth and intelligence of automation. The CRM can trigger personalised, context-aware actions based on customer behaviour and order data — without manual intervention.</p>
+
+<h3>Order Management Automations</h3>
+<ul class="cl">
+  <li><span class="ck ck-new">→</span><span><strong>New Shopify order received:</strong> CRM creates order record, notifies Sales/Admin in the CRM dashboard, sends internal WhatsApp alert to team, triggers customer confirmation email.</span></li>
+  <li><span class="ck ck-new">→</span><span><strong>Unread email order detected:</strong> CRM flags email as unread ticket, sends alert to Sales inbox, logs a task for follow-up within 2 hours. Auto-acknowledgement sent to customer.</span></li>
+  <li><span class="ck ck-new">→</span><span><strong>Order confirmed by Sales:</strong> CRM triggers notification to Kitchen team with order details, flavour notes, and required completion date. Status updates to "In Production."</span></li>
+  <li><span class="ck ck-new">→</span><span><strong>Order dispatched:</strong> Customer automatically receives a WhatsApp or email message with delivery update and care instructions (refrigerate immediately, consume within 1 week).</span></li>
+  <li><span class="ck ck-new">→</span><span><strong>Order completed:</strong> CRM logs completion, updates customer lifetime value, and optionally triggers a feedback/review request 24 hours later.</span></li>
+</ul>
+
+<h3>Customer Marketing Automations</h3>
+<ul class="cl">
+  <li><span class="ck ck-yes">★</span><span><strong>Birthday campaign:</strong> If a customer's birthday is on record, CRM sends them a "Treat yourself to a Salt cake this birthday 🍰" email 1 week in advance with a direct link to the Shopify store.</span></li>
+  <li><span class="ck ck-yes">★</span><span><strong>Win-back sequence:</strong> If a customer hasn't ordered in 60 days, CRM automatically sends a personalised re-engagement email: "We miss you at Salt Lagos — here's what's new on our menu."</span></li>
+  <li><span class="ck ck-yes">★</span><span><strong>Post-event follow-up:</strong> After an events order (weddings, corporate), CRM sends a follow-up 2 weeks later asking for feedback and referrals.</span></li>
+  <li><span class="ck ck-yes">★</span><span><strong>Seasonal promotions:</strong> CRM segments customers (e.g. those who ordered in December last year) and sends targeted campaigns for Christmas, Valentine's Day, Easter orders.</span></li>
+  <li><span class="ck ck-yes">★</span><span><strong>Social media lead nurture:</strong> When a social enquiry is converted to a contact but hasn't ordered yet, CRM drip-sends 2–3 emails over 1 week showcasing Salt's menu and testimonials.</span></li>
+</ul>
+
+
+<!-- 06 DEPARTMENT WORKFLOW -->
+<h2><span class="sec-num">06</span> Department Workflow in the CRM</h2>
+
+<div class="dept-grid">
+  <div class="dept-card" style="border-top-color: #3B82F6;">
+    <div class="dept-icon">📋</div>
+    <div class="dept-name">Sales / Admin</div>
+    <ul class="dept-list">
+      <li>CRM unified inbox for all channels</li>
+      <li>Unread email alerts and task assignments</li>
+      <li>Social DM review and response</li>
+      <li>Customer profile lookup before confirming</li>
+      <li>One-click order confirmation → kitchen alert</li>
+      <li>Logs phone/WhatsApp orders manually</li>
+    </ul>
+  </div>
+  <div class="dept-card" style="border-top-color: #8B5CF6;">
+    <div class="dept-icon">👩‍🍳</div>
+    <div class="dept-name">Kitchen / Production</div>
+    <ul class="dept-list">
+      <li>Receives CRM notifications for confirmed orders</li>
+      <li>Reviews order notes: flavour, size, allergens, design</li>
+      <li>Updates production status in CRM</li>
+      <li>Multi-day production items tracked on timeline view</li>
+      <li>Marks "Ready" to trigger delivery/pickup notification</li>
+    </ul>
+  </div>
+  <div class="dept-card" style="border-top-color: #0F2D52;">
+    <div class="dept-icon">📊</div>
+    <div class="dept-name">Management</div>
+    <ul class="dept-list">
+      <li>Full CRM analytics dashboard</li>
+      <li>Revenue by channel, product, customer segment</li>
+      <li>Social media enquiry conversion rates</li>
+      <li>Customer retention and lifetime value</li>
+      <li>Repeat order frequency and trends</li>
+      <li>Marketing campaign performance</li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- 07 ORDER STATUS PIPELINE -->
+<h2><span class="sec-num">07</span> Order Status Pipeline</h2>
+
+<p>The pipeline in Plan 2 is managed within the CRM's deal/pipeline view — a visual Kanban board where each order card moves through stages and triggers automated actions at each step.</p>
+
+<div class="tl">
+  <div class="tl-item">
+    <div class="tl-dot" style="background:#FEF3C7;">✦</div>
+    <div class="tl-content">
+      <div class="tl-title"><span class="badge b-amber">New Enquiry</span> &nbsp;Intake Stage</div>
+      <div class="tl-desc">Order or enquiry arrives from any channel. CRM creates a deal card and assigns to Sales/Admin. For email and social DMs, an auto-acknowledgement fires immediately. Unread email badge appears in the CRM inbox.</div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-dot" style="background:#DBEAFE;">✔</div>
+    <div class="tl-content">
+      <div class="tl-title"><span class="badge b-navy">Confirmed</span> &nbsp;Accepted & Logged</div>
+      <div class="tl-desc">Sales/Admin confirms details (delivery zone, lead time, special notes). CRM updates customer record with order value and preferences. Kitchen team notified via CRM task. Customer receives official confirmation.</div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-dot" style="background:#EDE9FE;">⚙</div>
+    <div class="tl-content">
+      <div class="tl-title"><span class="badge b-purple">In Production</span> &nbsp;Kitchen Stage</div>
+      <div class="tl-desc">Kitchen updates CRM. For multi-day orders (tiered cakes, wedding cakes), the CRM timeline view shows production progress. Management can see how many items are currently in production at any moment.</div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-dot" style="background:#FFEDD5;">🚚</div>
+    <div class="tl-content">
+      <div class="tl-title"><span class="badge b-orange">Ready / Out for Delivery</span> &nbsp;Dispatch Stage</div>
+      <div class="tl-desc">CRM triggers automated customer WhatsApp/email: "Your Salt Lagos order is on its way! 🍰 Remember to refrigerate immediately upon arrival." Delivery team updates status. Delivery zone validated against Salt's approved Lagos areas.</div>
+    </div>
+  </div>
+  <div class="tl-item">
+    <div class="tl-dot" style="background:#D1FAE5;">★</div>
+    <div class="tl-content">
+      <div class="tl-title"><span class="badge b-green">Completed</span> &nbsp;Fulfilled</div>
+      <div class="tl-desc">CRM logs completion. Customer lifetime value updated. Automated review request sent 24 hours later. If customer is repeat buyer, CRM flags them for the VIP segment. Seasonal follow-up enrolled if relevant (e.g. ordered for Christmas → added to Christmas 2026 campaign).</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- 08 TOOLS & COSTS -->
+<h2><span class="sec-num">08</span> Tools, Integrations & Costs</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tool</th>
+      <th>Role</th>
+      <th>Est. Monthly Cost</th>
+      <th>Priority</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>HubSpot CRM (Recommended Start)</strong></td>
+      <td>Central CRM hub. Connects to Shopify, Gmail, WhatsApp, social media. Manages all customer profiles, order pipelines, and automations. Free plan covers core functionality.</td>
+      <td>Free → $15–50/mo</td>
+      <td>🔴 Essential</td>
+    </tr>
+    <tr>
+      <td><strong>Zoho CRM (Alternative)</strong></td>
+      <td>Same function as HubSpot but more affordable at the paid tier. Better for omnichannel (WhatsApp, social, email, phone) without extra costs. Requires more setup time.</td>
+      <td>Free (3 users) → $14–23/user/mo</td>
+      <td>🟡 Alternative to HubSpot</td>
+    </tr>
+    <tr>
+      <td><strong>Shopify (existing)</strong></td>
+      <td>Commerce engine. Orders flow directly into CRM via native integration. No Zapier needed for Shopify data. Existing plan is sufficient.</td>
+      <td>Free (existing plan)</td>
+      <td>🔴 Essential</td>
+    </tr>
+    <tr>
+      <td><strong>Gmail (existing)</strong></td>
+      <td>CRM Gmail plugin installed in info@ and events@. Emails auto-log to customer records. Unread flags appear in CRM inbox.</td>
+      <td>Free (existing)</td>
+      <td>🔴 Essential</td>
+    </tr>
+    <tr>
+      <td><strong>WhatsApp Business + Twilio</strong></td>
+      <td>Connects WhatsApp to the CRM. Sends automated customer confirmations and team alerts. Logs WhatsApp conversations in customer profiles.</td>
+      <td>~$5–15/mo</td>
+      <td>🟡 Recommended</td>
+    </tr>
+    <tr>
+      <td><strong>Meta Business Suite (free)</strong></td>
+      <td>Manages Instagram and Facebook DMs. CRM social inbox pulls in all DMs and comments. Auto-redirect replies set up here.</td>
+      <td>Free</td>
+      <td>🟡 Recommended</td>
+    </tr>
+    <tr>
+      <td><strong>Zapier (optional)</strong></td>
+      <td>In Plan 2, Zapier is optional — used only for edge cases where the CRM doesn't natively connect (e.g. a specific social platform or SMS provider).</td>
+      <td>$0–20/mo (optional)</td>
+      <td>🟢 Optional</td>
+    </tr>
+    <tr class="cost-total">
+      <td colspan="2"><strong>Estimated Total Monthly Running Cost (HubSpot Free Tier)</strong></td>
+      <td><strong>~₦10,000–25,000/mo<br/>(~$5–20 USD)</strong></td>
+      <td></td>
+    </tr>
+    <tr class="cost-total">
+      <td colspan="2"><strong>Estimated Total Monthly Running Cost (HubSpot / Zoho Paid)</strong></td>
+      <td><strong>~₦55,000–100,000/mo<br/>(~$35–70 USD)</strong></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
+
+
+<!-- 09 IMPLEMENTATION PLAN -->
+<h2><span class="sec-num">09</span> Implementation Plan</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Phase</th>
+      <th>Tasks</th>
+      <th>Timeline</th>
+      <th>Owner</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Phase 1</strong><br/>CRM Setup</td>
+      <td>Create HubSpot (or Zoho) account. Install Shopify integration — all historical orders sync automatically. Connect Gmail plugin to info@ and events@. Set up the order pipeline stages in CRM.</td>
+      <td>Days 1–4</td>
+      <td>Consultant / Admin</td>
+    </tr>
+    <tr>
+      <td><strong>Phase 2</strong><br/>Channel Integration</td>
+      <td>Connect WhatsApp Business via Twilio. Link Meta Business Suite Instagram and Facebook to CRM social inbox. Set up auto-reply DMs. Create unread email alert workflow. Build customer notification templates.</td>
+      <td>Days 5–10</td>
+      <td>Consultant</td>
+    </tr>
+    <tr>
+      <td><strong>Phase 3</strong><br/>Automations</td>
+      <td>Build order automation workflows (confirm → kitchen alert, dispatch → customer message, complete → review request). Set up marketing automations (birthday campaign, win-back, seasonal). Create department CRM views.</td>
+      <td>Days 11–16</td>
+      <td>Consultant + Admin</td>
+    </tr>
+    <tr>
+      <td><strong>Phase 4</strong><br/>Dashboard & Training</td>
+      <td>Configure CRM dashboards for Sales, Kitchen, and Management. Connect the Salt Order Dashboard to CRM data (or use CRM's native pipeline view). Train all staff. Run parallel with old system for 1 week.</td>
+      <td>Days 17–24</td>
+      <td>Developer + Admin</td>
+    </tr>
+    <tr>
+      <td><strong>Phase 5</strong><br/>Marketing Activation</td>
+      <td>Launch first email marketing campaign from CRM. Activate birthday sequence. Set up seasonal campaign calendar for Q2 2026 (Easter, Mother's Day). Review first month's CRM analytics with management.</td>
+      <td>Week 5–6</td>
+      <td>Management + Admin</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<!-- 10 SIDE BY SIDE COMPARISON -->
+<h2><span class="sec-num">10</span> Plan 1 vs Plan 2 — Side by Side</h2>
+
+<table class="compare-table">
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Plan 1 · Zapier + Airtable</th>
+      <th>Plan 2 · Shopify + CRM</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Monthly Cost</strong></td>
+      <td class="plan1">~$25–45/mo</td>
+      <td class="plan2 winner">~$5–20/mo (free start) or $35–70/mo (full features)</td>
+    </tr>
+    <tr>
+      <td><strong>Setup Speed</strong></td>
+      <td class="plan1 winner">Faster — 2–3 weeks</td>
+      <td class="plan2">Slightly longer — 3–4 weeks</td>
+    </tr>
+    <tr>
+      <td><strong>Unread Email Alerts</strong></td>
+      <td class="plan1 winner">✔ Yes (Zapier + WhatsApp)</td>
+      <td class="plan2 winner">✔ Yes (CRM native inbox)</td>
+    </tr>
+    <tr>
+      <td><strong>Social Media Orders</strong></td>
+      <td class="plan1">Auto-redirect + Airtable logging</td>
+      <td class="plan2 winner">Full CRM social inbox — DMs, comments, profiles all tracked</td>
+    </tr>
+    <tr>
+      <td><strong>Customer Profiles</strong></td>
+      <td class="plan1">Basic (order records only)</td>
+      <td class="plan2 winner">Full profiles — history, lifetime value, preferences, source</td>
+    </tr>
+    <tr>
+      <td><strong>Department Routing</strong></td>
+      <td class="plan1 winner">✔ WhatsApp alerts + dashboard</td>
+      <td class="plan2 winner">✔ CRM tasks + notifications</td>
+    </tr>
+    <tr>
+      <td><strong>Order Status Tracking</strong></td>
+      <td class="plan1 winner">✔ Custom dashboard</td>
+      <td class="plan2 winner">✔ CRM pipeline view</td>
+    </tr>
+    <tr>
+      <td><strong>Marketing Automation</strong></td>
+      <td class="plan1">✗ Not included</td>
+      <td class="plan2 winner">✔ Birthday campaigns, win-back, seasonal, post-event</td>
+    </tr>
+    <tr>
+      <td><strong>Revenue Forecasting</strong></td>
+      <td class="plan1">Basic (Airtable)</td>
+      <td class="plan2 winner">Advanced (CRM analytics)</td>
+    </tr>
+    <tr>
+      <td><strong>Complexity</strong></td>
+      <td class="plan1 winner">Lower — easier for small teams</td>
+      <td class="plan2">Higher — more features to learn</td>
+    </tr>
+    <tr>
+      <td><strong>Best For</strong></td>
+      <td class="plan1">Salt right now — immediate problem solving</td>
+      <td class="plan2 winner">Salt in 6 months — growth, retention, marketing</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout callout-gold">
+  <div class="callout-label lbl-gold">🍰 Final Recommendation for Salt Lagos</div>
+  <p><strong>Start with Plan 1</strong> to solve the immediate pain points now (unread emails, missing social enquiries, department handoffs) — it's faster to implement and lower risk.</p>
+  <p style="margin-bottom:0"><strong>Migrate to Plan 2</strong> (HubSpot CRM + Shopify) within 6–12 months as the business grows and the team gets comfortable with unified tracking. Plan 2's marketing automation and customer intelligence features will become increasingly valuable as Salt scales and builds a loyal repeat customer base. The two plans are not mutually exclusive — Plan 1's Airtable data can be exported and migrated into the CRM when ready.</p>
+</div>
+
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  <span>Salt Lagos · Plan 2: Shopify + CRM · Feb 2026</span>
+  <span>Confidential — Internal Use Only</span>
+</div>
+
+</body>
+</html>
